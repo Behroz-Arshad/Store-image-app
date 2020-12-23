@@ -1,0 +1,93 @@
+{% extends 'RanaFurniture/base.html' %}
+{% block title %}
+    Image Market
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+     <form class="form-inline my-2 my-lg-0 float-right">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+    </div>
+
+        <div class="row">
+            <div class="col-md-2">
+
+                <!--this is for Catogories-->
+                <div class="list-group mt-3">
+                    <a href="{% url 'index' %}" class="list-group-item list-group-item-action active">
+                        All Images
+                    </a>
+                    {% for catgory in categories %}
+
+                        <a href="/category/{{ catgory.id }}" class="list-group-item list-group-item-action">
+                            {{ catgory.title }}
+                        </a>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-10">
+
+                <!-- this is for Images-->
+                <div class="row mt-3">
+
+                    <div class="col-md-12">
+                        <div class="card-columns">
+                            {% for img in images %}
+
+
+                                <div class="card" style="width: 18rem;">
+                                    <img class="card-img-top" src="/media/{{ img.image }}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ img.title }}</h5>
+                                        <p class="card-text">{{ img.description }}</p>
+                                        <a  class="btn btn-primary"
+                                           onclick="showModelwithImage('{{ img.image }}')">
+                                            View
+                                        </a>
+                                    </div>
+                                </div>
+
+
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true" >
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Rana Furnitures</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="#!" id="image-show" alt="" width="750px">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
